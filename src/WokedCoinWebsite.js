@@ -13,7 +13,7 @@ import {
 } from 'lucide-react';
 
 // Configuration constant
-const ENABLE_NOT_LIVE_POPUP = true;  // Set to false to disable the popup
+const ENABLE_NOT_LIVE_POPUP = false;  // Set to false to disable the popup
 
 const WokedCoinWebsite = () => {
   const [activeTab, setActiveTab] = useState('about');
@@ -88,6 +88,18 @@ const WokedCoinWebsite = () => {
           </div>
           <div className="space-x-4 flex items-center">
             <button 
+              onClick={() => setActiveTab('about')}
+              className={`px-4 py-2 rounded ${activeTab === 'about' ? 'bg-yellow-400' : 'bg-gray-200'}`}
+            >
+              About
+            </button>
+            <button 
+              onClick={() => setActiveTab('roadmap')}
+              className={`px-4 py-2 rounded ${activeTab === 'roadmap' ? 'bg-yellow-400' : 'bg-gray-200'}`}
+            >
+              Roadmap
+            </button>
+            <button 
               onClick={triggerMemeAnimation}
               className="bg-yellow-400 text-black px-6 py-2 rounded-full hover:bg-yellow-500 transition-all transform hover:scale-105 flex items-center space-x-2"
             >
@@ -113,8 +125,9 @@ const WokedCoinWebsite = () => {
             {[
               { id: 'about', label: 'About', icon: <Dog /> },
               { id: 'tokenomics', label: 'Tokenomics', icon: <Flame /> },
-              { id: 'staking', label: 'Staking', icon: <Rocket /> },
-              { id: 'memes', label: 'Meme Vault', icon: <Laugh /> }
+              { id: 'liquidityMining', label: <Rocket />, label: 'Liquidity Mining' },
+              { id: 'memes', label: <Laugh />, label: 'Meme Vault' },
+              { id: 'wokePapers', label: 'Woke Papers', icon: <Laugh /> }
             ].map((tab) => (
               <button
                 key={tab.id}
@@ -129,6 +142,13 @@ const WokedCoinWebsite = () => {
                 <span className="font-semibold">{tab.label}</span>
               </button>
             ))}
+            {/* Airdrop Registration Button */}
+            <button 
+              onClick={() => setActiveTab('airdrop')}
+              className="bg-blue-500 text-white px-8 py-3 rounded-full hover:bg-blue-600 transition-all transform hover:scale-105 mx-auto mt-4"
+            >
+              Airdrop Registration is Live!
+            </button>
           </div>
 
           {/* Content Sections with Playful Design */}
@@ -150,16 +170,8 @@ const WokedCoinWebsite = () => {
                     alt="Woked Background" 
                     className="w-60 h-60"
                   />
-                  <p className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-purple-600 ml-4 animate-bounce">
-                    If you don't buy me, you are a fascist!
-                  </p>
                 </div>
                 <div className="grid grid-cols-3 gap-4 mt-6">
-                  <div className="bg-yellow-100 p-4 rounded-lg text-center hover:bg-yellow-200 transition-all">
-                    <Zap className="mx-auto text-yellow-600 mb-2" />
-                    <h3 className="font-bold">Ultra Deflationary</h3>
-                    <p className="text-sm text-gray-600">Burning tokens faster than a dog chases a ball!</p>
-                  </div>
                   <div className="bg-green-100 p-4 rounded-lg text-center hover:bg-green-200 transition-all">
                     <Dog className="mx-auto text-green-600 mb-2" />
                     <h3 className="font-bold">Community Powered</h3>
@@ -170,6 +182,90 @@ const WokedCoinWebsite = () => {
                     <h3 className="font-bold">To the Moon</h3>
                     <p className="text-sm text-gray-600">Fetch those gains!</p>
                   </div>
+                  <div className="bg-yellow-100 p-4 rounded-lg text-center hover:bg-yellow-200 transition-all">
+                    <Flame className="mx-auto text-yellow-600 mb-2" />
+                    <h3 className="font-bold">Airdrop</h3>
+                    <p className="text-sm text-gray-600">Get started with 5% (50M tokens) for our community!</p>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {activeTab === 'roadmap' && (
+              <div className="mt-12">
+                <h3 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-500 to-green-600 mb-6">
+                  The Most Politically Correct Roadmap Ever 🗺️
+                </h3>
+                <div className="space-y-8 relative before:absolute before:left-5 before:top-0 before:w-0.5 before:h-full before:bg-gradient-to-b before:from-green-500 before:via-purple-500 before:to-indigo-500">
+                  {[
+                    {
+                      icon: <Trophy />,
+                      color: 'green',
+                      title: 'Phase 1: Safe Space Community Building',
+                      description: 'Creating an inclusive echo chamber where everyone agrees with everything. Trigger warnings included. 🤗'
+                    },
+                    {
+                      icon: <PawPrint />,
+                      color: 'blue',
+                      title: 'Phase 2: Privilege-Based Airdrop Registration',
+                      description: 'Complete our 23-page privilege assessment form. Extra tokens for checking your privilege! 📝'
+                    },
+                    {
+                      icon: <Coins />,
+                      color: 'purple',
+                      title: 'Phase 3: Token Launch',
+                      description: 'Fair launch* (*Terms and conditions apply based on your pronouns) 🚀'
+                    },
+                    {
+                      icon: <Zap />,
+                      color: 'yellow',
+                      title: 'Phase 4: Social Justice Airdrop',
+                      description: 'Tokens distributed based on your oppression score. Trust fund kids get priority access! 💰'
+                    },
+                    {
+                      icon: <Rocket />,
+                      color: 'red',
+                      title: 'Phase 5: Ethical Staking & Rewards',
+                      description: 'Stake your tokens to earn social credit points. Higher rewards for virtue signaling! 🌟'
+                    },
+                    {
+                      icon: <Coffee />,
+                      color: 'pink',
+                      title: 'Phase 6: Politically Correct Casino',
+                      description: 'Gender-neutral gambling games. Every player is a winner because competition is a social construct! 🎰'
+                    },
+                    {
+                      icon: <Sandwich />,
+                      color: 'indigo',
+                      title: 'Phase 7: Partnerships & Cultural Appropriation',
+                      description: 'Expanding to new markets while being mindful of our carbon footprint. Vegan-friendly transactions only! 🌱'
+                    }
+                  ].map((phase, index) => (
+                    <div 
+                      key={index}
+                      className="flex items-start space-x-4 hover:-translate-y-1 transition-all duration-300 ease-in-out"
+                    >
+                      <div 
+                        className={`bg-${phase.color}-500 rounded-full p-2 z-10 shadow-lg 
+                          hover:scale-110 hover:rotate-12 transition-all duration-300 ease-in-out`}
+                      >
+                        <div className="w-5 h-5 text-white">
+                          {phase.icon}
+                        </div>
+                      </div>
+                      <div 
+                        className="bg-white/90 backdrop-blur-sm rounded-xl p-6 flex-grow
+                          shadow-md hover:shadow-xl transition-all duration-300 ease-in-out"
+                      >
+                        <h4 className={`text-lg font-bold text-${phase.color}-600 mb-2`}>
+                          {phase.title}
+                        </h4>
+                        <p className="text-gray-600">
+                          {phase.description}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
             )}
@@ -177,39 +273,101 @@ const WokedCoinWebsite = () => {
             {activeTab === 'tokenomics' && (
               <div className="space-y-4">
                 <h2 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-500 to-green-600 mb-4">
-                  WOKED Tokenomics: Bark-onomics!
+                  WOKED Tokenomics: Community Focused!
                 </h2>
                 <div className="bg-yellow-50 p-6 rounded-xl">
                   <ul className="space-y-3 text-gray-700">
                     <li className="flex items-center space-x-3">
                       <Flame className="text-red-500" />
-                      <span>Total Supply: 1,000,000,000 WOKED</span>
+                      <span>Airdrop: 5% (50M tokens)</span>
                     </li>
                     <li className="flex items-center space-x-3">
                       <Zap className="text-yellow-500" />
-                      <span>Burn Rate: 2% of every transaction (Bye-bye, tokens!)</span>
+                      <span>Liquidity Mining: 30% (300M tokens)</span>
                     </li>
                     <li className="flex items-center space-x-3">
                       <Dog className="text-green-500" />
-                      <span>Distribution: 40% Liquidity, 30% Community, 20% Dev, 10% Treats (Marketing)</span>
+                      <span>Team/Development: 15% (150M tokens)</span>
+                    </li>
+                    <li className="flex items-center space-x-3">
+                      <PawPrint className="text-blue-500" />
+                      <span>Community Growth: 10% (100M tokens)</span>
+                    </li>
+                    <li className="flex items-center space-x-3">
+                      <Coffee className="text-pink-500" />
+                      <span>Casino Games: 4% (40M tokens) [from Future Ecosystem Reserve]</span>
+                    </li>
+                    <li className="flex items-center space-x-3">
+                      <Rocket className="text-purple-500" />
+                      <span>Remaining Ecosystem Reserve: 36% (360M tokens)</span>
                     </li>
                   </ul>
                 </div>
               </div>
             )}
 
-            {activeTab === 'staking' && (
+            {activeTab === 'liquidityMining' && (
               <div>
                 <h2 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-500 to-green-600 mb-4">
-                  Stake & Shake Those Gains!
+                  Liquidity Mining: Earn While You Provide!
                 </h2>
                 <div className="bg-green-50 p-6 rounded-xl space-y-4">
+                  <h3 className="text-xl font-bold">Woke Dog Coin Liquidity Mining Program</h3>
+                  <p>🌟 Welcome to the Woke Dog Coin Liquidity Mining Program! 🌟</p>
+                  <p>Our Liquidity Mining Program is designed to reward 🎁 users who contribute to the growth 🌿 and stability of the Woke Dog Coin (🐶‍🌲 WOKED) ecosystem. By providing ⚓️ liquidity, you not only help strengthen our 🌐 token but also earn 💰 generous rewards. Here’s everything you need to know to get started:</p>
+                  
+                  <h4>What is Liquidity Mining?</h4>
+                  <p>Liquidity mining allows users to earn 💸 WOKED tokens by providing liquidity to decentralized exchanges like Uniswap 🏢. This ⚓️ liquidity ensures smooth 🚕 trading for WOKED holders and supports the overall health of the token ecosystem.</p>
+                  
+                  <h4>How It Works</h4>
+                  <p><strong>Provide Liquidity:</strong> Add an equal value of WOKED 💵 and ETH ⚖️ to the WOKED/ETH 🔄 liquidity pool on Uniswap. In return, you will receive 🏦 Liquidity Provider (LP) tokens representing your share of the pool.</p>
+                  <p><strong>Stake Your LP Tokens:</strong> Stake your LP 🏦 tokens in the Woke Dog Coin Liquidity Mining smart 🧠 contract via our official platform.</p>
+                  <p><strong>Earn Rewards:</strong> Earn 💰 WOKED tokens as rewards proportional to your contribution ⚓️ to the pool. Rewards 🏆 are distributed continuously and can be claimed 🛠️ directly from the platform.</p>
+                  
+                  <h4>Key Features of the Program</h4>
+                  <ul>
+                    <li>Generous Reward Allocation: 30% ➕ of the total WOKED supply (💸 300M tokens) is allocated for liquidity mining rewards.</li>
+                    <li>Time-Based Rewards: Longer ⏳ stakers are rewarded more, incentivizing sustained 🌱 participation.</li>
+                    <li>Bonus Multiplier: Early participants ⏭️ and long-term stakers receive bonus rewards 💎.</li>
+                    <li>No Lock-In: Withdraw your LP 🏦 tokens at any time, but holding longer maximizes 🏆 rewards.</li>
+                  </ul>
+                  
+                  <h4>Step-by-Step Guide</h4>
+                  <p><strong>Prepare Your Wallet:</strong> Ensure your 🛍️ wallet (e.g., MetaMask) is connected to Ethereum ⚓️. Acquire WOKED tokens 💸 and ETH for liquidity provision.</p>
+                  <p><strong>Add Liquidity on Uniswap:</strong> Visit the Uniswap WOKED/ETH Pool 🏢 (insert link). Add an equal value of WOKED 💵 and ETH ⚖️ to the pool. Confirm the transaction in your 🛍️ wallet to receive LP tokens 🏦.</p>
+                  <p><strong>Stake Your LP Tokens:</strong> Visit the Woke Dog Coin Liquidity Mining Page 🔄 (insert link). Connect your 🛍️ wallet and approve the staking contract 🧠. Stake your LP tokens and start earning 🏆 rewards immediately.</p>
+                  <p><strong>Claim Your Rewards:</strong> Monitor your 🏆 rewards in real-time ⏳. Claim ✅ rewards directly to your 🛍️ wallet whenever you’re ready.</p>
+                  
+                  <h4>Reward Structure</h4>
+                  <p>Initial Boost: For the first 3 months, enjoy a ➕ 20% bonus on all 🏆 rewards for staking LP tokens.</p>
+                  <p>Time Multiplier: Earn higher rewards 🏆 based on the duration ⏳ of your stake.</p>
+                  <ul>
+                    <li>1 month: Base ➕ rewards</li>
+                    <li>3 months: 1.2x 🔄 rewards</li>
+                    <li>6 months or more: 1.5x rewards 🏆</li>
+                  </ul>
+                  <p>Early Participant Bonus: The first 1,000 ➕ stakers will receive an additional 10% reward multiplier 💰.</p>
+                  
+                  <h4>Why Join the Liquidity Mining Program?</h4>
+                  <ul>
+                    <li>Passive Income: Earn WOKED tokens 💰 just by providing liquidity ⚓️.</li>
+                    <li>Strengthen the Ecosystem: Support the growth 🌿 and stability of Woke Dog Coin 🐶‍🌲.</li>
+                    <li>Scarcity Mechanism: A portion of transaction fees 📈 generated from the pool will be burned 🔥, reducing supply ➖ and increasing 🌐 token value.</li>
+                  </ul>
+                  
+                  <h4>FAQs</h4>
+                  <p><strong>What happens to my staked LP tokens?</strong> Your LP 🏦 tokens remain in the 🧠 smart contract and can be withdrawn at any time ⏳. They continue to generate trading 🚕 fees while staked.</p>
+                  <p><strong>Are there risks involved?</strong> Yes, providing liquidity ⚓️ carries risks such as impermanent loss ➖. Please ensure you understand these risks before participating ✅.</p>
+                  <p><strong>How are rewards calculated?</strong> Rewards 🏆 are distributed based on the proportion of your staked LP 🏦 tokens in the pool and the time ⏳ multiplier for your stake.</p>
+                  
+                  <h4>Join the Liquidity Mining Program Today!</h4>
+                  <p>Become part of the Woke Dog Coin 🐶‍🌲 revolution. Stake your LP tokens 🏦, earn rewards 🏆, and support the 🔥 meme coin with a mission. Visit our Liquidity Mining Platform 🔄 (insert link) to get started now!</p>
                   <p className="text-gray-700">
                     Provide liquidity and earn rewards faster than a dog chasing a tennis ball!
                   </p>
                   <button className="bg-green-500 text-white px-8 py-3 rounded-full hover:bg-green-600 transition-all transform hover:scale-105 flex items-center space-x-2 mx-auto">
                     <Rocket className="w-6 h-6" />
-                    <span>Start Staking</span>
+                    <span>Start Liquidity Mining</span>
                   </button>
                   <div className="text-center text-sm text-gray-600">
                     Warning: May cause excessive tail wagging
@@ -230,7 +388,7 @@ const WokedCoinWebsite = () => {
                       className="bg-purple-50 p-4 rounded-lg hover:bg-purple-100 transition-all transform hover:scale-105"
                     >
                       <img 
-                        src={`/api/placeholder/300/200`} 
+                        src="/dogmeme1.jpeg"
                         alt={`Meme ${num}`} 
                         className="w-full rounded-lg mb-2"
                       />
@@ -244,6 +402,50 @@ const WokedCoinWebsite = () => {
                     Generate Random Meme
                   </button>
                 </div>
+              </div>
+            )}
+
+            {activeTab === 'airdrop' && (
+              <div className="space-y-4">
+                <h2 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-500 to-green-600 mb-4">
+                  Airdrop Registration
+                </h2>
+                <iframe
+                  src="https://airdrop.woked.me/"
+                  height="660px"
+                  width="100%"
+                  className="border-0 rounded-xl"
+                />
+              </div>
+            )}
+
+            {activeTab === 'wokePapers' && (
+              <div className="space-y-4">
+                <h2 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-500 to-green-600 mb-4">
+                  Woke Papers
+                </h2>
+                <ul className="space-y-2">
+                  <li className="flex items-center space-x-2">
+                    <span role="img" aria-label="Taco" className="text-2xl">🌮</span>
+                    <a href="/wokepapers/latino-paper.pdf" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">Latino Paper</a>
+                  </li>
+                  <li className="flex items-center space-x-2">
+                    <span role="img" aria-label="Chopsticks" className="text-2xl">🥢</span>
+                    <a href="/wokepapers/asian-paper.pdf" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">Asian Paper</a>
+                  </li>
+                  <li className="flex items-center space-x-2">
+                    <span role="img" aria-label="African Drum" className="text-2xl">🪘</span>
+                    <a href="/wokepapers/african-paper.pdf" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">African Paper</a>
+                  </li>
+                  <li className="flex items-center space-x-2">
+                    <span role="img" aria-label="Flag of Europe" className="text-2xl">🇪🇺</span>
+                    <a href="/wokepapers/european-paper.pdf" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">European Paper</a>
+                  </li>
+                  <li className="flex items-center space-x-2">
+                    <span role="img" aria-label="Feather" className="text-2xl">🪶</span>
+                    <a href="/wokepapers/indigenous-paper.pdf" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">Indigenous Paper</a>
+                  </li>
+                </ul>
               </div>
             )}
           </div>
