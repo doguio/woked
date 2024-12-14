@@ -125,8 +125,8 @@ const WokedCoinWebsite = () => {
             {[
               { id: 'about', label: 'About', icon: <Dog /> },
               { id: 'tokenomics', label: 'Tokenomics', icon: <Flame /> },
+              { id: 'roadmap', label: 'Roadmap', icon: <Trophy /> },
               { id: 'liquidityMining', label: <Rocket />, label: 'Liquidity Mining' },
-              { id: 'memes', label: <Laugh />, label: 'Meme Vault' },
               { id: 'wokePapers', label: 'Woke Papers', icon: <Laugh /> }
             ].map((tab) => (
               <button
@@ -226,7 +226,7 @@ const WokedCoinWebsite = () => {
                       icon: <Rocket />,
                       color: 'red',
                       title: 'Phase 5: Ethical Staking & Rewards',
-                      description: 'Stake your tokens to earn social credit points. Higher rewards for virtue signaling! 🌟'
+                      description: 'Stake your tokens to earn social credit points. Higher rewards for virtue signaling! 💰'
                     },
                     {
                       icon: <Coffee />,
@@ -299,7 +299,7 @@ const WokedCoinWebsite = () => {
                     </li>
                     <li className="flex items-center space-x-3">
                       <Rocket className="text-purple-500" />
-                      <span>Remaining Ecosystem Reserve: 36% (360M tokens)</span>
+                      <span>Remaining Ecosystem Reserve: 36% (360M tokens) - Managed by a DAO</span>
                     </li>
                   </ul>
                 </div>
@@ -320,7 +320,7 @@ const WokedCoinWebsite = () => {
                   <p>Liquidity mining allows users to earn 💸 WOKED tokens by providing liquidity to decentralized exchanges like Uniswap 🏢. This ⚓️ liquidity ensures smooth 🚕 trading for WOKED holders and supports the overall health of the token ecosystem.</p>
                   
                   <h4>How It Works</h4>
-                  <p><strong>Provide Liquidity:</strong> Add an equal value of WOKED 💵 and ETH ⚖️ to the WOKED/ETH 🔄 liquidity pool on Uniswap. In return, you will receive 🏦 Liquidity Provider (LP) tokens representing your share of the pool.</p>
+                  <p><strong>Provide Liquidity:</strong> Add an equal value of WOKED 💵 and ETH ���️ to the WOKED/ETH 🔄 liquidity pool on Uniswap. In return, you will receive 🏦 Liquidity Provider (LP) tokens representing your share of the pool.</p>
                   <p><strong>Stake Your LP Tokens:</strong> Stake your LP 🏦 tokens in the Woke Dog Coin Liquidity Mining smart 🧠 contract via our official platform.</p>
                   <p><strong>Earn Rewards:</strong> Earn 💰 WOKED tokens as rewards proportional to your contribution ⚓️ to the pool. Rewards 🏆 are distributed continuously and can be claimed 🛠️ directly from the platform.</p>
                   
@@ -376,35 +376,6 @@ const WokedCoinWebsite = () => {
               </div>
             )}
 
-            {activeTab === 'memes' && (
-              <div>
-                <h2 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-500 to-green-600 mb-4">
-                  Meme Vault: Crypto Comedy Unleashed!
-                </h2>
-                <div className="grid grid-cols-2 gap-4">
-                  {[1, 2, 3, 4].map((num) => (
-                    <div 
-                      key={num} 
-                      className="bg-purple-50 p-4 rounded-lg hover:bg-purple-100 transition-all transform hover:scale-105"
-                    >
-                      <img 
-                        src="/dogmeme1.jpeg"
-                        alt={`Meme ${num}`} 
-                        className="w-full rounded-lg mb-2"
-                      />
-                      <p className="text-center text-gray-600">Epic Crypto Doge Meme #{num}</p>
-                    </div>
-                    
-                  ))}
-                </div>
-                <div className="text-center mt-6">
-                  <button className="bg-yellow-400 text-black px-6 py-2 rounded-full hover:bg-yellow-500 transition-all transform hover:scale-105">
-                    Generate Random Meme
-                  </button>
-                </div>
-              </div>
-            )}
-
             {activeTab === 'airdrop' && (
               <div className="space-y-4">
                 <h2 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-500 to-green-600 mb-4">
@@ -448,6 +419,43 @@ const WokedCoinWebsite = () => {
                 </ul>
               </div>
             )}
+
+            {/* About the Team Section */}
+            <div className="mt-12 bg-gradient-to-r from-yellow-200 to-green-200 p-8 rounded-lg shadow-lg">
+              <h2 className="text-3xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-yellow-500 to-green-600 mb-8">
+                Meet the Team: The Most Inclusive Crew Ever!
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div className="bg-white bg-opacity-90 rounded-xl p-6 shadow-md text-center">
+                  <img src="/woked.jpeg" alt="Founder" className="w-32 h-32 rounded-full mx-auto mb-4" />
+                  <h3 className="text-xl font-bold">Founder: Everyone</h3>
+                  <p className="text-gray-600">
+                    Our founder is literally everyone! Yes, you heard it right. We believe in a truly inclusive approach where every voice matters. So, if you feel like you’re part of the team, congratulations! You are!
+                  </p>
+                </div>
+                <div className="bg-white bg-opacity-90 rounded-xl p-6 shadow-md text-center">
+                  <img src="/chatgpt.jpg" alt="ChatGPT" className="w-32 h-32 rounded-full mx-auto mb-4" />
+                  <h3 className="text-xl font-bold">Developer: ChatGPT</h3>
+                  <p className="text-gray-600">
+                    Meet ChatGPT, our AI developer who can code faster than you can say "blockchain." Just don’t ask it to explain memes; it’s still working on that.
+                  </p>
+                </div>
+                <div className="bg-white bg-opacity-90 rounded-xl p-6 shadow-md text-center">
+                  <img src="/claude.jpg" alt="Claude AI" className="w-32 h-32 rounded-full mx-auto mb-4" />
+                  <h3 className="text-xl font-bold">Developer: Claude AI</h3>
+                  <p className="text-gray-600">
+                    Claude AI is our other developer, known for its ability to generate code and existential crises simultaneously. It’s like having a philosopher on the team, but with more syntax errors.
+                  </p>
+                </div>
+                <div className="bg-white bg-opacity-90 rounded-xl p-6 shadow-md text-center">
+                  <img src="/grok.jpg" alt="Grok" className="w-32 h-32 rounded-full mx-auto mb-4" />
+                  <h3 className="text-xl font-bold">Marketing Manager: Grok</h3>
+                  <p className="text-gray-600">
+                    Grok is our marketing guru who understands memes better than most humans. If you need a viral campaign, just ask Grok—after all, it’s all about the vibes!
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </main>
