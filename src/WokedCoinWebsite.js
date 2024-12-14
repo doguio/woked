@@ -205,16 +205,16 @@ const WokedCoinWebsite = () => {
                       description: 'Creating an inclusive echo chamber where everyone agrees with everything. Trigger warnings included. 🤗'
                     },
                     {
-                      icon: <PawPrint />,
-                      color: 'blue',
-                      title: 'Phase 2: Privilege-Based Airdrop Registration',
-                      description: 'Complete our 23-page privilege assessment form. Extra tokens for checking your privilege! 📝'
-                    },
-                    {
                       icon: <Coins />,
                       color: 'purple',
-                      title: 'Phase 3: Token Launch',
+                      title: 'Phase 2: Token Launch',
                       description: 'Fair launch* (*Terms and conditions apply based on your pronouns) 🚀'
+                    },
+                    {
+                      icon: <PawPrint />,
+                      color: 'blue',
+                      title: 'Phase 3: Privilege-Based Airdrop Registration',
+                      description: 'Complete our 23-page privilege assessment form. Extra tokens for checking your privilege! 📝'
                     },
                     {
                       icon: <Zap />,
@@ -229,15 +229,21 @@ const WokedCoinWebsite = () => {
                       description: 'Stake your tokens to earn social credit points. Higher rewards for virtue signaling! 💰'
                     },
                     {
+                      icon: <Trophy />,
+                      color: 'orange',
+                      title: 'Phase 6: Token Management by DAO',
+                      description: 'Transitioning to a decentralized governance model where token holders can vote on key decisions. 🗳️'
+                    },
+                    {
                       icon: <Coffee />,
                       color: 'pink',
-                      title: 'Phase 6: Politically Correct Casino',
+                      title: 'Phase 7: Politically Correct Casino',
                       description: 'Gender-neutral gambling games. Every player is a winner because competition is a social construct! 🎰'
                     },
                     {
                       icon: <Sandwich />,
                       color: 'indigo',
-                      title: 'Phase 7: Partnerships & Cultural Appropriation',
+                      title: 'Phase 8: Partnerships & Cultural Appropriation',
                       description: 'Expanding to new markets while being mindful of our carbon footprint. Vegan-friendly transactions only! 🌱'
                     }
                   ].map((phase, index) => (
@@ -320,7 +326,7 @@ const WokedCoinWebsite = () => {
                   <p>Liquidity mining allows users to earn 💸 WOKED tokens by providing liquidity to decentralized exchanges like Uniswap 🏢. This ⚓️ liquidity ensures smooth 🚕 trading for WOKED holders and supports the overall health of the token ecosystem.</p>
                   
                   <h4>How It Works</h4>
-                  <p><strong>Provide Liquidity:</strong> Add an equal value of WOKED 💵 and ETH ���️ to the WOKED/ETH 🔄 liquidity pool on Uniswap. In return, you will receive 🏦 Liquidity Provider (LP) tokens representing your share of the pool.</p>
+                  <p><strong>Provide Liquidity:</strong> Add an equal value of WOKED 💵 and ETH ⚖️ to the WOKED/ETH 🔄 liquidity pool on Uniswap. In return, you will receive 🏦 Liquidity Provider (LP) tokens representing your share of the pool.</p>
                   <p><strong>Stake Your LP Tokens:</strong> Stake your LP 🏦 tokens in the Woke Dog Coin Liquidity Mining smart 🧠 contract via our official platform.</p>
                   <p><strong>Earn Rewards:</strong> Earn 💰 WOKED tokens as rewards proportional to your contribution ⚓️ to the pool. Rewards 🏆 are distributed continuously and can be claimed 🛠️ directly from the platform.</p>
                   
