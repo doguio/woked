@@ -127,7 +127,7 @@ const WokedCoinWebsite = () => {
     try {
       setIsLoading(true);
       // Use a public provider if MetaMask is not available
-      const provider = new ethers.providers.JsonRpcProvider("YOUR_RPC_URL"); // Replace with your Ethereum RPC URL
+      const provider = new ethers.providers.JsonRpcProvider("https://mainnet.base.org"); // Replace with your Ethereum RPC URL
       const contract = new ethers.Contract(AIRDROP_CONTRACT_ADDRESS, AIRDROP_ABI, provider);
       
       const info = await contract.recipients(address);
