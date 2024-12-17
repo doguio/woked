@@ -36,6 +36,7 @@ const WokedCoinWebsite = () => {
   const [currentMonth, setCurrentMonth] = useState(0);
   const [manualWalletAddress, setManualWalletAddress] = useState('');
   const [isValidAddress, setIsValidAddress] = useState(true);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     // Remove the timer since the popup should not be dismissible
@@ -181,36 +182,67 @@ const WokedCoinWebsite = () => {
 
       {/* Navigation */}
       <nav className="relative z-10 bg-white bg-opacity-90 shadow-md p-4 backdrop-blur-sm">
-        <div className="container mx-auto flex justify-between items-center">
+        <div className="container mx-auto flex flex-col md:flex-row justify-between items-center">
           <div className="flex items-center space-x-4">
             <img 
               src="/woked.jpeg"
               alt="Woked Coin Logo" 
-              className="w-16 h-16 rounded-full border-4 border-yellow-400  animate-spin-slow"
+              className="w-16 h-16 rounded-full border-4 border-yellow-400 animate-spin-slow"
             />
-            <h1 className="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-yellow-500 to-green-600">
+            <h1 className="text-2xl md:text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-yellow-500 to-green-600">
               Woke Dog Coin (WOKED)
             </h1>
           </div>
-          <div className="space-x-4 flex items-center">
+          <div className="md:hidden">
             <button 
-              onClick={() => setActiveTab('about')}
-              className={`px-4 py-2 rounded ${activeTab === 'about' ? 'bg-yellow-400' : 'bg-gray-200'}`}
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="text-gray-600 focus:outline-none"
             >
-              About
+              {isMobileMenuOpen ? '✕' : '☰'}
+            </button>
+          </div>
+          <div className={`flex-col md:flex-row md:flex ${isMobileMenuOpen ? 'flex' : 'hidden'} md:space-x-4`}>
+            <button 
+              onClick={() => { setActiveTab('about'); setIsMobileMenuOpen(false); }}
+              className={`flex items-center space-x-2 px-4 py-2 rounded transition-transform transform hover:scale-105 ${activeTab === 'about' ? 'bg-yellow-400' : 'bg-gray-200'}`}
+            >
+              <Dog className="w-5 h-5" />
+              <span>About</span>
             </button>
             <button 
-              onClick={() => setActiveTab('roadmap')}
-              className={`px-4 py-2 rounded ${activeTab === 'roadmap' ? 'bg-yellow-400' : 'bg-gray-200'}`}
+              onClick={() => { setActiveTab('tokenomics'); setIsMobileMenuOpen(false); }}
+              className={`flex items-center space-x-2 px-4 py-2 rounded transition-transform transform hover:scale-105 ${activeTab === 'tokenomics' ? 'bg-yellow-400' : 'bg-gray-200'}`}
             >
-              Roadmap
+              <Flame className="w-5 h-5" />
+              <span>Tokenomics</span>
             </button>
             <button 
-              onClick={triggerMemeAnimation}
-              className="bg-yellow-400 text-black px-6 py-2 rounded-full hover:bg-yellow-500 transition-all transform hover:scale-105 flex items-center space-x-2"
+              onClick={() => { setActiveTab('roadmap'); setIsMobileMenuOpen(false); }}
+              className={`flex items-center space-x-2 px-4 py-2 rounded transition-transform transform hover:scale-105 ${activeTab === 'roadmap' ? 'bg-yellow-400' : 'bg-gray-200'}`}
+            >
+              <Trophy className="w-5 h-5" />
+              <span>Roadmap</span>
+            </button>
+            <button 
+              onClick={() => { setActiveTab('liquidityMining'); setIsMobileMenuOpen(false); }}
+              className={`flex items-center space-x-2 px-4 py-2 rounded transition-transform transform hover:scale-105 ${activeTab === 'liquidityMining' ? 'bg-yellow-400' : 'bg-gray-200'}`}
+            >
+              <Rocket className="w-5 h-5" />
+              <span>Liquidity Mining</span>
+            </button>
+            <button 
+              onClick={() => { setActiveTab('wokePapers'); setIsMobileMenuOpen(false); }}
+              className={`flex items-center space-x-2 px-4 py-2 rounded transition-transform transform hover:scale-105 ${activeTab === 'wokePapers' ? 'bg-yellow-400' : 'bg-gray-200'}`}
             >
               <Laugh className="w-5 h-5" />
-              <span>Much Wow!</span>
+              <span>Woke Papers</span>
+            </button>
+            <button 
+              onClick={() => { setActiveTab('airdropVesting'); setIsMobileMenuOpen(false); }}
+              className={`flex items-center space-x-2 px-4 py-2 rounded transition-transform transform hover:scale-105 ${activeTab === 'airdropVesting' ? 'bg-yellow-400' : 'bg-gray-200'}`}
+            >
+              <Zap className="w-5 h-5" />
+              <span>Airdrop Vesting</span>
             </button>
             <button 
               onClick={() => setIsTradeDialogOpen(true)}
@@ -222,42 +254,9 @@ const WokedCoinWebsite = () => {
           </div>
         </div>
       </nav>
-
       {/* Main Content */}
       <main className="container mx-auto flex-grow p-6 relative z-10">
         <div className="bg-white bg-opacity-90 rounded-2xl shadow-2xl overflow-hidden backdrop-blur-sm">
-          {/* Tabs */}
-          <div className="flex border-b border-gray-200">
-            {[
-              { id: 'about', label: 'About', icon: <Dog /> },
-              { id: 'tokenomics', label: 'Tokenomics', icon: <Flame /> },
-              { id: 'roadmap', label: 'Roadmap', icon: <Trophy /> },
-              { id: 'liquidityMining', label: <Rocket />, label: 'Liquidity Mining' },
-              { id: 'wokePapers', label: 'Woke Papers', icon: <Laugh /> },
-              { id: 'airdropVesting', label: 'Airdrop Vesting', icon: <Zap /> }
-            ].map((tab) => (
-              <button
-                key={tab.id}
-                className={`flex items-center space-x-2 p-4 transform transition-all hover:scale-105 ${
-                  activeTab === tab.id 
-                    ? 'bg-yellow-50 text-yellow-600 border-b-4 border-yellow-600' 
-                    : 'text-gray-600 hover:bg-gray-50'
-                }`}
-                onClick={() => setActiveTab(tab.id)}
-              >
-                {tab.icon}
-                <span className="font-semibold">{tab.label}</span>
-              </button>
-            ))}
-            {/* Airdrop Registration Button */}
-            <button 
-              onClick={() => window.open('https://t.me/+aPeCtrCNfL0zZWNh?start_referral=ref_501438198_ikgogw', '_blank')}
-              className="bg-blue-500 text-white px-8 py-3 rounded-full hover:bg-blue-600 transition-all transform hover:scale-105 mx-auto mt-4"
-            >
-              Airdrop Registration Phase 2 is Live!
-            </button>
-          </div>
-
           {/* Content Sections with Playful Design */}
           <div className="p-8">
             {activeTab === 'about' && (
@@ -452,7 +451,7 @@ const WokedCoinWebsite = () => {
                   <p><strong>Claim Your Rewards:</strong> Monitor your 🏆 rewards in real-time ⏳. Claim ✅ rewards directly to your 🛍️ wallet whenever you’re ready.</p>
                   
                   <h4>Reward Structure</h4>
-                  <p>Initial Boost: For the first 3 months, enjoy a ➕ 20% bonus on all 🏆 rewards for staking LP tokens.</p>
+                  <p>Initial Boost: For the first 3 months, enjoy a ➕ 20% bonus on all ��� rewards for staking LP tokens.</p>
                   <p>Time Multiplier: Earn higher rewards 🏆 based on the duration ⏳ of your stake.</p>
                   <ul>
                     <li>1 month: Base ➕ rewards</li>
