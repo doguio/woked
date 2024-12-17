@@ -11,9 +11,17 @@ import {
   PawPrint,
   Laugh
 } from 'lucide-react';
+import { ethers } from 'ethers';
 
 // Configuration constant
 const ENABLE_NOT_LIVE_POPUP = false;  // Set to false to disable the popup
+
+// Add the ABI for the relevant functions from OwnerDistributedAirdrop
+const AIRDROP_ABI = [
+  "function recipients(address) view returns (uint256 totalAmount, uint256 claimedAmount, uint256 startTime)",
+  "function calculateClaimableAmount(address) view returns (uint256)",
+  "function distributeToRecipient(address) external"
+];
 
 const WokedCoinWebsite = () => {
   const [activeTab, setActiveTab] = useState('about');
@@ -21,6 +29,13 @@ const WokedCoinWebsite = () => {
   const [dogQuote, setDogQuote] = useState('');
   const [isTradeDialogOpen, setIsTradeDialogOpen] = useState(false);
   const [isPopupVisible, setIsPopupVisible] = useState(ENABLE_NOT_LIVE_POPUP);
+  const [walletConnected, setWalletConnected] = useState(false);
+  const [vestingInfo, setVestingInfo] = useState(null);
+  const [claimableAmount, setClaimableAmount] = useState('0');
+  const [isLoading, setIsLoading] = useState(false);
+  const [currentMonth, setCurrentMonth] = useState(0);
+  const [manualWalletAddress, setManualWalletAddress] = useState('');
+  const [isValidAddress, setIsValidAddress] = useState(true);
 
   useEffect(() => {
     // Remove the timer since the popup should not be dismissible
@@ -43,7 +58,98 @@ const WokedCoinWebsite = () => {
     setTimeout(() => setShowMemeAnimation(false), 3000);
   };
 
-  const WOKED_TOKEN_ADDRESS = "0xYOUR_TOKEN_ADDRESS_HERE"; // Replace with actual token address
+  const WOKED_TOKEN_ADDRESS = "0xfA1Ec0f92f2D0fdf080BBFBb2a598D616D6b06Fc"; // Base TEstnet
+
+  const AIRDROP_CONTRACT_ADDRESS = "0xa3B7CCBc151825860FA10DDbd3593A87E16aE95C";
+
+  useEffect(() => {
+    if (walletConnected) {
+      fetchVestingInfo();
+    }
+  }, [walletConnected]);
+
+  const fetchVestingInfo = async () => {
+    try {
+      setIsLoading(true);
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const signer = provider.getSigner();
+      const contract = new ethers.Contract(AIRDROP_CONTRACT_ADDRESS, AIRDROP_ABI, signer);
+      
+      const address = await signer.getAddress();
+      const info = await contract.recipients(address);
+      const claimable = await contract.calculateClaimableAmount(address);
+      
+      setVestingInfo({
+        totalAmount: info.totalAmount,
+        claimedAmount: info.claimedAmount,
+        startTime: info.startTime.toNumber()
+      });
+      setClaimableAmount(claimable);
+      
+      // Calculate current month based on start time
+      const monthsSinceStart = Math.floor((Date.now() / 1000 - info.startTime.toNumber()) / (30 * 24 * 60 * 60));
+      setCurrentMonth(Math.min(monthsSinceStart + 1, 6));
+      
+    } catch (error) {
+      console.error('Error fetching vesting info:', error);
+      alert('Error fetching vesting information. Please try again.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleClaim = async () => {
+    try {
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const signer = provider.getSigner();
+      const contract = new ethers.Contract(AIRDROP_CONTRACT_ADDRESS, AIRDROP_ABI, signer);
+      
+      const tx = await contract.distributeToRecipient(await signer.getAddress());
+      await tx.wait();
+      
+      alert('Tokens claimed successfully!');
+      fetchVestingInfo(); // Refresh the vesting info
+    } catch (error) {
+      console.error('Error claiming tokens:', error);
+      alert('Error claiming tokens. Please try again.');
+    }
+  };
+
+  const validateAddress = (address) => {
+    try {
+      return ethers.utils.isAddress(address);
+    } catch {
+      return false;
+    }
+  };
+
+  const fetchVestingInfoByAddress = async (address) => {
+    try {
+      setIsLoading(true);
+      // Use a public provider if MetaMask is not available
+      const provider = new ethers.providers.JsonRpcProvider("YOUR_RPC_URL"); // Replace with your Ethereum RPC URL
+      const contract = new ethers.Contract(AIRDROP_CONTRACT_ADDRESS, AIRDROP_ABI, provider);
+      
+      const info = await contract.recipients(address);
+      const claimable = await contract.calculateClaimableAmount(address);
+      
+      setVestingInfo({
+        totalAmount: info.totalAmount,
+        claimedAmount: info.claimedAmount,
+        startTime: info.startTime.toNumber()
+      });
+      setClaimableAmount(claimable);
+      
+      const monthsSinceStart = Math.floor((Date.now() / 1000 - info.startTime.toNumber()) / (30 * 24 * 60 * 60));
+      setCurrentMonth(Math.min(monthsSinceStart + 1, 6));
+      
+    } catch (error) {
+      console.error('Error fetching vesting info:', error);
+      alert('Error fetching vesting information. Please try again.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-100 to-purple-200 flex flex-col overflow-hidden">
@@ -127,7 +233,8 @@ const WokedCoinWebsite = () => {
               { id: 'tokenomics', label: 'Tokenomics', icon: <Flame /> },
               { id: 'roadmap', label: 'Roadmap', icon: <Trophy /> },
               { id: 'liquidityMining', label: <Rocket />, label: 'Liquidity Mining' },
-              { id: 'wokePapers', label: 'Woke Papers', icon: <Laugh /> }
+              { id: 'wokePapers', label: 'Woke Papers', icon: <Laugh /> },
+              { id: 'airdropVesting', label: 'Airdrop Vesting', icon: <Zap /> }
             ].map((tab) => (
               <button
                 key={tab.id}
@@ -144,10 +251,10 @@ const WokedCoinWebsite = () => {
             ))}
             {/* Airdrop Registration Button */}
             <button 
-              onClick={() => setActiveTab('airdrop')}
+              onClick={() => window.open('https://t.me/+aPeCtrCNfL0zZWNh?start_referral=ref_501438198_ikgogw', '_blank')}
               className="bg-blue-500 text-white px-8 py-3 rounded-full hover:bg-blue-600 transition-all transform hover:scale-105 mx-auto mt-4"
             >
-              Airdrop Registration is Live!
+              Airdrop Registration Phase 2 is Live!
             </button>
           </div>
 
@@ -423,6 +530,162 @@ const WokedCoinWebsite = () => {
                     <a href="/wokepapers/indigenous-paper.pdf" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">Indigenous Paper</a>
                   </li>
                 </ul>
+              </div>
+            )}
+
+            {activeTab === 'airdropVesting' && (
+              <div className="space-y-6">
+                <h2 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-500 to-green-600 mb-4">
+                  Airdrop Vesting Schedule
+                </h2>
+
+                <div className="bg-white/90 backdrop-blur-sm rounded-xl p-8">
+                  <div className="vesting-checker space-y-6">
+                    {/* Connection Options */}
+                    <div className="space-y-4">
+                      <h3 className="text-xl font-bold text-purple-600">Check Your Vesting Status</h3>
+                      
+                      {/* MetaMask Connection */}
+                      <div className="flex justify-between items-center p-4 bg-purple-50 rounded-xl">
+                        <div>
+                          <h4 className="font-semibold">Option 1: Connect with MetaMask</h4>
+                          <p className="text-sm text-gray-600">Connect your wallet to check and claim tokens</p>
+                        </div>
+                        <button 
+                          onClick={async () => {
+                            try {
+                              if (!window.ethereum) throw new Error("Please install MetaMask");
+                              await window.ethereum.request({ method: 'eth_requestAccounts' });
+                              setWalletConnected(true);
+                              setManualWalletAddress(''); // Clear manual address when connecting MetaMask
+                            } catch (error) {
+                              console.error(error);
+                              alert("Failed to connect wallet: " + error.message);
+                            }
+                          }}
+                          className="bg-purple-500 text-white px-4 py-2 rounded-full hover:bg-purple-600 transition-all"
+                        >
+                          {walletConnected ? 'Wallet Connected' : 'Connect MetaMask'}
+                        </button>
+                      </div>
+
+                      {/* Manual Address Input */}
+                      <div className="p-4 bg-purple-50 rounded-xl">
+                        <h4 className="font-semibold mb-2">Option 2: Enter Wallet Address</h4>
+                        <p className="text-sm text-gray-600 mb-4">Check vesting status for any address (view-only)</p>
+                        <div className="flex gap-4">
+                          <div className="flex-grow">
+                            <input
+                              type="text"
+                              placeholder="Enter Ethereum wallet address (0x...)"
+                              value={manualWalletAddress}
+                              onChange={(e) => {
+                                const address = e.target.value;
+                                setManualWalletAddress(address);
+                                setIsValidAddress(validateAddress(address));
+                              }}
+                              className={`w-full px-4 py-2 rounded-lg border ${
+                                isValidAddress ? 'border-gray-300' : 'border-red-500'
+                              } focus:outline-none focus:ring-2 focus:ring-purple-500`}
+                            />
+                            {!isValidAddress && manualWalletAddress && (
+                              <p className="text-red-500 text-sm mt-1">Please enter a valid Ethereum address</p>
+                            )}
+                          </div>
+                          <button
+                            onClick={() => {
+                              if (validateAddress(manualWalletAddress)) {
+                                fetchVestingInfoByAddress(manualWalletAddress);
+                              }
+                            }}
+                            disabled={!isValidAddress || !manualWalletAddress}
+                            className={`px-4 py-2 rounded-full ${
+                              isValidAddress && manualWalletAddress
+                                ? 'bg-purple-500 hover:bg-purple-600 text-white'
+                                : 'bg-gray-300 cursor-not-allowed text-gray-500'
+                            } transition-all`}
+                          >
+                            Check Status
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Vesting Schedule Display */}
+                    {vestingInfo && (
+                      <div className="bg-purple-50 p-6 rounded-xl space-y-4">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                          <div className="space-y-2">
+                            <h4 className="font-semibold text-purple-600">Total Allocation</h4>
+                            <p className="text-2xl font-bold">{ethers.utils.formatEther(vestingInfo.totalAmount)} WOKED</p>
+                          </div>
+                          <div className="space-y-2">
+                            <h4 className="font-semibold text-purple-600">Claimed Amount</h4>
+                            <p className="text-2xl font-bold">{ethers.utils.formatEther(vestingInfo.claimedAmount)} WOKED</p>
+                          </div>
+                          <div className="space-y-2">
+                            <h4 className="font-semibold text-purple-600">Currently Claimable</h4>
+                            <p className="text-2xl font-bold">{ethers.utils.formatEther(claimableAmount)} WOKED</p>
+                          </div>
+                          <div className="space-y-2">
+                            <h4 className="font-semibold text-purple-600">Vesting Start Date</h4>
+                            <p className="text-2xl font-bold">{new Date(vestingInfo.startTime * 1000).toLocaleDateString()}</p>
+                          </div>
+                        </div>
+
+                        {/* Vesting Schedule Progress */}
+                        <div className="mt-6">
+                          <h4 className="font-semibold text-purple-600 mb-4">Vesting Progress</h4>
+                          <div className="space-y-4">
+                            {[
+                              { month: 1, percentage: 10 },
+                              { month: 2, percentage: 30 },
+                              { month: 3, percentage: 50 },
+                              { month: 4, percentage: 70 },
+                              { month: 5, percentage: 90 },
+                              { month: 6, percentage: 100 }
+                            ].map((period) => {
+                              const isUnlocked = currentMonth >= period.month;
+                              return (
+                                <div key={period.month} className="relative">
+                                  <div className="flex justify-between mb-1">
+                                    <span className="text-sm font-medium text-purple-600">Month {period.month}</span>
+                                    <span className="text-sm font-medium text-purple-600">{period.percentage}%</span>
+                                  </div>
+                                  <div className="w-full bg-purple-200 rounded-full h-2.5">
+                                    <div 
+                                      className={`h-2.5 rounded-full ${isUnlocked ? 'bg-purple-600' : 'bg-gray-300'}`}
+                                      style={{ width: `${period.percentage}%` }}
+                                    ></div>
+                                  </div>
+                                </div>
+                              );
+                            })}
+                          </div>
+                        </div>
+
+                        {/* Claim Button */}
+                        {Number(claimableAmount) > 0 && (
+                          <button
+                            onClick={handleClaim}
+                            className="w-full mt-6 bg-green-500 text-white px-6 py-3 rounded-full hover:bg-green-600 transition-all transform hover:scale-105 flex items-center justify-center space-x-2"
+                          >
+                            <Rocket className="w-5 h-5" />
+                            <span>Claim Available Tokens</span>
+                          </button>
+                        )}
+                      </div>
+                    )}
+
+                    {/* Loading State */}
+                    {isLoading && (
+                      <div className="text-center py-8">
+                        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600 mx-auto"></div>
+                        <p className="mt-4 text-purple-600">Loading vesting information...</p>
+                      </div>
+                    )}
+                  </div>
+                </div>
               </div>
             )}
 
