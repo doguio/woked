@@ -510,25 +510,43 @@ const WokedCoinWebsite = () => {
                 <ul className="space-y-2">
                   <li className="flex items-center space-x-2">
                     <span role="img" aria-label="Taco" className="text-2xl">🌮</span>
-                    <a href="/wokepapers/latino-paper.pdf" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">Latino Paper</a>
+                    <a href="/wokepapers/Latino_Paper.pdf" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">Latino Paper</a>
                   </li>
                   <li className="flex items-center space-x-2">
                     <span role="img" aria-label="Chopsticks" className="text-2xl">🥢</span>
-                    <a href="/wokepapers/asian-paper.pdf" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">Asian Paper</a>
+                    <a href="/wokepapers/Asian_Paper.pdf" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">Asian Paper</a>
                   </li>
                   <li className="flex items-center space-x-2">
                     <span role="img" aria-label="African Drum" className="text-2xl">🪘</span>
-                    <a href="/wokepapers/african-paper.pdf" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">African Paper</a>
+                    <a href="/wokepapers/African_Paper.pdf" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">African Paper</a>
                   </li>
                   <li className="flex items-center space-x-2">
                     <span role="img" aria-label="Flag of Europe" className="text-2xl">🇪🇺</span>
-                    <a href="/wokepapers/european-paper.pdf" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">European Paper</a>
+                    <a href="/wokepapers/European_Paper.pdf" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">European Paper</a>
                   </li>
                   <li className="flex items-center space-x-2">
                     <span role="img" aria-label="Feather" className="text-2xl">🪶</span>
-                    <a href="/wokepapers/indigenous-paper.pdf" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">Indigenous Paper</a>
+                    <a href="/wokepapers/Indigenous_Paper.pdf" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">Indigenous Paper</a>
                   </li>
                 </ul>
+
+                <section className="my-8 p-4 bg-white rounded shadow">
+                <h2 className="text-2xl font-bold mb-4">Download the Whitepaper</h2>
+                <p className="mb-4">
+                  **Why a Whitepaper?**  
+                  Isn't it time we rethink the term "white paper"? After all, who decided that only white papers get to be the authoritative voice? Let's embrace inclusivity! Download our *not-so-privileged* Whitepaper and join the conversation.
+                </p>
+                <a 
+                  href="/wokepapers/Whitepaper.pdf" 
+                  className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition"
+                  download
+                >
+                  **Download the Whitepaper**
+                </a>
+                <p className="mt-4">
+                  **P.S.** This document is packed with insights that are as colorful as the perspectives we aim to include. Let's make knowledge accessible to everyone, regardless of the color of the paper!
+                </p>
+              </section>
               </div>
             )}
 
