@@ -12,6 +12,7 @@ import {
   Laugh
 } from 'lucide-react';
 import { ethers } from 'ethers';
+import { FaTwitter, FaTelegram } from 'react-icons/fa';
 
 // Configuration constant
 const ENABLE_NOT_LIVE_POPUP = false;  // Set to false to disable the popup
@@ -187,11 +188,20 @@ const WokedCoinWebsite = () => {
             <img 
               src="/woked.jpeg"
               alt="Woked Coin Logo" 
-              className="w-16 h-16 rounded-full border-4 border-yellow-400 animate-spin-slow"
+              className="w-16 h-16 rounded-full border-4 border-yellow-400 animate-spin-slow mr-4"
             />
-            <h1 className="text-2xl md:text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-yellow-500 to-green-600">
+            <h1 className="text-2xl md:text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-yellow-500 to-green-600 ml-4">
               Woke Dog Coin (WOKED)
             </h1>
+            {/* Social Media Links */}
+            <div className="absolute left-90 top-20 flex space-x-4 ml-4">
+              <a href="https://x.com/wokedcoin" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-blue-500">
+                <FaTwitter className="w-8 h-8" />
+              </a>
+              <a href="https://t.me/wokedogcoin" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-blue-500">
+                <FaTelegram className="w-8 h-8" />
+              </a>
+            </div>
           </div>
           <div className="md:hidden">
             <button 
@@ -434,7 +444,7 @@ const WokedCoinWebsite = () => {
                   <h4>How It Works</h4>
                   <p><strong>Provide Liquidity:</strong> Add an equal value of WOKED 💵 and ETH ⚖️ to the WOKED/ETH 🔄 liquidity pool on Uniswap. In return, you will receive 🏦 Liquidity Provider (LP) tokens representing your share of the pool.</p>
                   <p><strong>Stake Your LP Tokens:</strong> Stake your LP 🏦 tokens in the Woke Dog Coin Liquidity Mining smart 🧠 contract via our official platform.</p>
-                  <p><strong>Earn Rewards:</strong> Earn 💰 WOKED tokens as rewards proportional to your contribution ⚓️ to the pool. Rewards 🏆 are distributed continuously and can be claimed 🛠️ directly from the platform.</p>
+                  <p><strong>Earn Rewards:</strong> Earn �� WOKED tokens as rewards proportional to your contribution ⚓️ to the pool. Rewards 🏆 are distributed continuously and can be claimed 🛠️ directly from the platform.</p>
                   
                   <h4>Key Features of the Program</h4>
                   <ul>
@@ -451,7 +461,7 @@ const WokedCoinWebsite = () => {
                   <p><strong>Claim Your Rewards:</strong> Monitor your 🏆 rewards in real-time ⏳. Claim ✅ rewards directly to your 🛍️ wallet whenever you’re ready.</p>
                   
                   <h4>Reward Structure</h4>
-                  <p>Initial Boost: For the first 3 months, enjoy a ➕ 20% bonus on all ��� rewards for staking LP tokens.</p>
+                  <p>Initial Boost: For the first 3 months, enjoy a ➕ 20% bonus on all rewards for staking LP tokens.</p>
                   <p>Time Multiplier: Earn higher rewards 🏆 based on the duration ⏳ of your stake.</p>
                   <ul>
                     <li>1 month: Base ➕ rewards</li>
@@ -758,11 +768,24 @@ const WokedCoinWebsite = () => {
             </button>
             <h2 className="text-xl font-bold mb-4">Buy WOKED</h2>
             <iframe
-              src={`https://app.uniswap.org/#/swap?outputCurrency=${WOKED_TOKEN_ADDRESS}&theme=light`}
-              height="660px"
+              src="https://app.uniswap.org/explore/pools/base/0x850a47ADC887871C68597f5fe3209da4D01cD993"
+              height="600px"
               width="100%"
               className="border-0 rounded-xl"
             />
+            <script>
+              {`const iframe = document.querySelector('iframe');
+              iframe.onload = () => {
+                  iframe.contentWindow.postMessage(
+                      { type: 'selectTab', tab: 'Swap' }, 
+                      'https://app.uniswap.org'
+                  );
+                  iframe.contentWindow.postMessage(
+                      { type: 'selectChart', chart: 'Price' }, 
+                      'https://app.uniswap.org'
+                  );
+              };`}
+            </script>
           </div>
         </div>
       )}
