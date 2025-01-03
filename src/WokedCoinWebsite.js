@@ -275,10 +275,73 @@ const WokedCoinWebsite = () => {
                   Welcome to the WOKED Revolution!
                 </h2>
                 <p className="text-gray-700 text-lg leading-relaxed">
-                  WOKED Coin isn't just a cryptocurrency - it's a movement powered by 
-                  memes, community, and the unstoppable spirit of the internet's favorite 
-                  four-legged friend: the DOGE!
+                  Woke Dog Coin isn't just a cryptocurrency - it's the world's first AI-powered dog meme coin! 
+                  Powered by the ai16z Eliza framework, our Woke Dog AI Agent is leading the revolution 
+                  in decentralized social engagement. Watch as it controls our Twitter presence with 
+                  the perfect blend of memes, wit, and woke consciousness!
                 </p>
+
+                {/* Contract Info Box */}
+                <div className="bg-gradient-to-r from-purple-100 to-pink-100 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all">
+                  <h3 className="text-xl font-bold mb-4 text-purple-600">Smart Contract Details</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <a 
+                      href="https://basescan.org/token/0xfA1Ec0f92f2D0fdf080BBFBb2a598D616D6b06Fc"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center space-x-3 bg-white p-4 rounded-lg hover:bg-purple-50 transition-all"
+                    >
+                      <Coins className="w-8 h-8 text-purple-500" />
+                      <div>
+                        <h4 className="font-semibold">Contract Address</h4>
+                        <p className="text-sm text-gray-600 break-all">0xfA1Ec0f92f2D0fdf080BBFBb2a598D616D6b06Fc</p>
+                      </div>
+                    </a>
+                    <a 
+                      href="https://dexscreener.com/base/0x850a47adc887871c68597f5fe3209da4d01cd993"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center space-x-3 bg-white p-4 rounded-lg hover:bg-purple-50 transition-all"
+                    >
+                      <Zap className="w-8 h-8 text-purple-500" />
+                      <div>
+                        <h4 className="font-semibold">DexScreener</h4>
+                        <p className="text-sm text-gray-600">View Price & Trading Info</p>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+
+                {/* AI Agent Feature Box */}
+                <div className="bg-gradient-to-r from-blue-100 to-green-100 p-6 rounded-xl shadow-lg mt-6">
+                  <h3 className="text-xl font-bold mb-4 text-blue-600">Meet Woke Dog AI - Your Meme Coin's Brain! 🤖</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="bg-white p-4 rounded-lg">
+                      <h4 className="font-semibold text-blue-500 mb-2">AI-Powered Social Presence</h4>
+                      <p className="text-gray-600">
+                        Our AI agent, powered by ai16z Eliza framework, autonomously manages our Twitter presence, 
+                        creating the perfect blend of memes, engagement, and community interaction.
+                      </p>
+                    </div>
+                    <div className="bg-white p-4 rounded-lg">
+                      <h4 className="font-semibold text-blue-500 mb-2">Decentralized Intelligence</h4>
+                      <p className="text-gray-600">
+                        Woke Dog AI learns from community interactions, adapting its behavior to represent the 
+                        collective consciousness of our holders. It's not just an AI - it's your AI!
+                      </p>
+                    </div>
+                  </div>
+                  <a 
+                    href="https://twitter.com/wokedcoin" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center space-x-2 bg-blue-500 text-white px-6 py-3 rounded-full hover:bg-blue-600 transition-all mt-4"
+                  >
+                    <FaTwitter className="w-5 h-5" />
+                    <span>Follow Woke Dog on Twitter</span>
+                  </a>
+                </div>
+
                 {/* Large Center Logo */}
                 <div className="inset-0 flex items-center justify-center pointer-events-none z-0">
                   <img 
@@ -287,6 +350,7 @@ const WokedCoinWebsite = () => {
                     className="w-60 h-60"
                   />
                 </div>
+                
                 <div className="grid grid-cols-3 gap-4 mt-6">
                   <div className="bg-green-100 p-4 rounded-lg text-center hover:bg-green-200 transition-all">
                     <Dog className="mx-auto text-green-600 mb-2" />
